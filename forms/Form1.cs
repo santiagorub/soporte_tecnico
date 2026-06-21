@@ -1,13 +1,18 @@
 using System;
 using System.Windows.Forms;
 using soporte_tecnico.forms;
+using soporte_tecnico.controllers;
 
 namespace soporte_tecnico
 {
     public partial class Form1 : Form
     {
+        private nCliente controladorCliente = new nCliente();
+        private nTecnico controladorTecnico = new nTecnico();
+        private nPedido controladorPedido = new nPedido();
         private frmCliente? clienteForm;
         private frmTecnico? tecnicoForm;
+        private frmPedidos? pedidosForm;
         private frmSeguimiento? seguimientoForm;
         private frmReportes? reportesForm;
 
@@ -44,11 +49,27 @@ namespace soporte_tecnico
 
             tecnicoForm.BringToFront();
         }
+
+        private void btnPedidos_Click(object sender, EventArgs e)
+        {
+            if (pedidosForm == null || pedidosForm.IsDisposed)
+            {
+                pedidosForm = new frmPedidos(controladorCliente, controladorTecnico, controladorPedido);
+                pedidosForm.FormClosed += PedidosForm_FormClosed;
+            }
+
+            if (!pedidosForm.Visible)
+                pedidosForm.Show();
+
+            pedidosForm.BringToFront();
+        }
+
         private void btnSeguimiento_Click(object sender, EventArgs e)
         {
             if (seguimientoForm == null || seguimientoForm.IsDisposed)
             {
                 seguimientoForm = new frmSeguimiento();
+                seguimientoForm.FormClosed += SeguimientoForm_FormClosed;
             }
             if (!seguimientoForm.Visible)
                 seguimientoForm.Show();
@@ -60,6 +81,7 @@ namespace soporte_tecnico
             if (reportesForm == null || reportesForm.IsDisposed)
             {
                 reportesForm = new frmReportes();
+                reportesForm.FormClosed += ReportesForm_FormClosed;
             }
             if (!reportesForm.Visible)
                 reportesForm.Show();
@@ -76,6 +98,11 @@ namespace soporte_tecnico
             tecnicoForm = null;
         }
 
+        private void PedidosForm_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            pedidosForm = null;
+        }
+
         private void SeguimientoForm_FormClosed(object? sender, FormClosedEventArgs e)
         {
             seguimientoForm = null;
@@ -86,5 +113,9 @@ namespace soporte_tecnico
             reportesForm = null;
         }
 
+
     }
+
+
 }
+

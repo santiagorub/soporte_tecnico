@@ -21,7 +21,7 @@ namespace soporte_tecnico.forms
             ActualizarGrilla();
         }
 
-        // cuando cambia la seleccion, tomamos el tecnico seleccionado y mostramos sus datos
+        //cuando cambia la seleccion, tomamos el tecnico seleccionado y mostramos sus datos
         private void dgvTecnicos_SelectionChanged(object? sender, EventArgs e)
         {
             if (dgvTecnicos.SelectedRows.Count == 0)
@@ -32,7 +32,7 @@ namespace soporte_tecnico.forms
 
             var fila = dgvTecnicos.SelectedRows[0];
 
-            // esperamos que la grilla este enlazada a objetos Tecnico
+            //esperamos que la grilla este enlazada a objetos Tecnico
             if (fila.DataBoundItem is soporte_tecnico.models.Tecnico tecnico)
             {
                 idSeleccionado = tecnico.Id;
@@ -42,7 +42,7 @@ namespace soporte_tecnico.forms
             }
             else
             {
-                // si por algun motivo no esta enlazada, dejamos id en -1
+                //si por algun motivo no esta enlazada, dejamos id en -1
                 idSeleccionado = -1;
             }
         }

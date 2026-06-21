@@ -8,19 +8,19 @@
     "net10.0-windows": []
   },
   "packageFolders": {
-    "C:\\Users\\tobiv\\.nuget\\packages\\": {}
+    "C:\\Users\\HP\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Soporte Tecnico\\soporte_tecnico\\soporte_tecnico.csproj",
+      "projectUniqueName": "C:\\Users\\HP\\OneDrive\\Documentos\\soporte_tecnico\\soporte_tecnico.csproj",
       "projectName": "soporte_tecnico",
-      "projectPath": "C:\\Soporte Tecnico\\soporte_tecnico\\soporte_tecnico.csproj",
-      "packagesPath": "C:\\Users\\tobiv\\.nuget\\packages\\",
-      "outputPath": "C:\\Soporte Tecnico\\soporte_tecnico\\obj\\",
+      "projectPath": "C:\\Users\\HP\\OneDrive\\Documentos\\soporte_tecnico\\soporte_tecnico.csproj",
+      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HP\\OneDrive\\Documentos\\soporte_tecnico\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\tobiv\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

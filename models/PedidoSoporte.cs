@@ -13,6 +13,9 @@ namespace soporte_tecnico.models
         public DateTime FechaIngreso { get; set; }
         public Estado EstadoActual { get; set; }
 
+        public List<Comentario> Comentarios { get; set; }
+        public List<HistorialEstado> HistorialEstados { get; set; }
+        public DateTime? FechaResolucion { get; set; } // Puede ser null hasta que se resuelva
         public PedidoSoporte(int id, Cliente cliente, Tecnico tecnico, string descripcion, DateTime fechaIngreso, Estado estado)
         {
             Id = id;

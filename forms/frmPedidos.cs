@@ -78,7 +78,12 @@ namespace soporte_tecnico.forms
             PedidoSoporte pedidoSeleccionado = (PedidoSoporte)dgvPedidos.CurrentRow.DataBoundItem;
             Estado nuevoEstado = (Estado)cmbEstados.SelectedItem;
 
-            _controladorPedido.CambiarEstado(pedidoSeleccionado.Id, nuevoEstado);
+            _controladorPedido.RegistrarSeguimiento(
+                pedidoSeleccionado.Id, 
+                nuevoEstado,
+                "",
+                "Sistema"
+                );
 
             ActualizarGrid();
             MessageBox.Show("Estado actualizado.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);

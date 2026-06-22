@@ -68,7 +68,7 @@ namespace soporte_tecnico
         {
             if (seguimientoForm == null || seguimientoForm.IsDisposed)
             {
-                seguimientoForm = new frmSeguimiento();
+                seguimientoForm = new frmSeguimiento(controladorPedido);
                 seguimientoForm.FormClosed += SeguimientoForm_FormClosed;
             }
             if (!seguimientoForm.Visible)

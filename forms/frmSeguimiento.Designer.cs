@@ -43,62 +43,64 @@
             // lblBuscar
             // 
             lblBuscar.AutoSize = true;
-            lblBuscar.Location = new Point(19, 11);
-            lblBuscar.Margin = new Padding(2, 0, 2, 0);
+            lblBuscar.Location = new Point(35, 23);
+            lblBuscar.Margin = new Padding(4, 0, 4, 0);
             lblBuscar.Name = "lblBuscar";
-            lblBuscar.Size = new Size(88, 15);
+            lblBuscar.Size = new Size(177, 32);
             lblBuscar.TabIndex = 0;
             lblBuscar.Text = "Buscar pedido: ";
             lblBuscar.Click += label1_Click;
             // 
             // txtBuscar
             // 
-            txtBuscar.Location = new Point(111, 8);
-            txtBuscar.Margin = new Padding(2, 1, 2, 1);
+            txtBuscar.Location = new Point(206, 17);
+            txtBuscar.Margin = new Padding(4, 2, 4, 2);
             txtBuscar.Name = "txtBuscar";
-            txtBuscar.Size = new Size(110, 23);
+            txtBuscar.Size = new Size(201, 39);
             txtBuscar.TabIndex = 1;
             // 
             // button1
             // 
-            button1.Location = new Point(225, 9);
-            button1.Margin = new Padding(2, 1, 2, 1);
+            button1.BackColor = Color.LightBlue;
+            button1.Cursor = Cursors.Hand;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(418, 19);
+            button1.Margin = new Padding(4, 2, 4, 2);
             button1.Name = "button1";
-            button1.Size = new Size(81, 22);
+            button1.Size = new Size(150, 47);
             button1.TabIndex = 2;
             button1.Text = "Buscar";
             button1.UseVisualStyleBackColor = false;
-            button1.BackColor = Color.LightBlue;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.Cursor = Cursors.Hand;
+            button1.Click += button1_Click;
             // 
             // dgvSeguimiento
             // 
             dgvSeguimiento.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSeguimiento.Location = new Point(19, 52);
-            dgvSeguimiento.Margin = new Padding(2, 1, 2, 1);
+            dgvSeguimiento.Location = new Point(35, 111);
+            dgvSeguimiento.Margin = new Padding(4, 2, 4, 2);
             dgvSeguimiento.Name = "dgvSeguimiento";
             dgvSeguimiento.RowHeadersWidth = 82;
-            dgvSeguimiento.Size = new Size(581, 253);
+            dgvSeguimiento.Size = new Size(1079, 540);
             dgvSeguimiento.TabIndex = 3;
+            dgvSeguimiento.CellClick += dgvSeguimiento_CellClick;
             // 
             // cmbEstado
             // 
             cmbEstado.FormattingEnabled = true;
-            cmbEstado.Location = new Point(458, 8);
-            cmbEstado.Margin = new Padding(2, 1, 2, 1);
+            cmbEstado.Location = new Point(851, 17);
+            cmbEstado.Margin = new Padding(4, 2, 4, 2);
             cmbEstado.Name = "cmbEstado";
-            cmbEstado.Size = new Size(132, 23);
+            cmbEstado.Size = new Size(242, 40);
             cmbEstado.TabIndex = 4;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(406, 11);
-            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Location = new Point(754, 23);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(48, 15);
+            label1.Size = new Size(96, 32);
             label1.TabIndex = 5;
             label1.Text = "Estado: ";
             label1.Click += label1_Click_1;
@@ -106,43 +108,42 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(19, 320);
-            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Location = new Point(35, 683);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(76, 15);
+            label2.Size = new Size(151, 32);
             label2.TabIndex = 6;
             label2.Text = "Comentario: ";
             // 
             // txtComentario
             // 
-            txtComentario.Location = new Point(99, 317);
-            txtComentario.Margin = new Padding(2, 1, 2, 1);
+            txtComentario.Location = new Point(184, 676);
+            txtComentario.Margin = new Padding(4, 2, 4, 2);
             txtComentario.Multiline = true;
             txtComentario.Name = "txtComentario";
-            txtComentario.Size = new Size(491, 61);
+            txtComentario.Size = new Size(908, 126);
             txtComentario.TabIndex = 7;
-            txtComentario.Visible = false;
             // 
             // button2
             // 
-            button2.Location = new Point(356, 504);
-            button2.Margin = new Padding(2, 1, 2, 1);
+            button2.BackColor = Color.LightBlue;
+            button2.Cursor = Cursors.Hand;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Location = new Point(661, 1075);
+            button2.Margin = new Padding(4, 2, 4, 2);
             button2.Name = "button2";
-            button2.Size = new Size(190, 22);
+            button2.Size = new Size(353, 47);
             button2.TabIndex = 8;
             button2.Text = "Guardar Cambios";
             button2.UseVisualStyleBackColor = false;
-            button2.BackColor = Color.LightBlue;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.Cursor = Cursors.Hand;
             button2.Click += button2_Click;
             // 
             // frmSeguimiento
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(618, 393);
+            ClientSize = new Size(1148, 838);
             Controls.Add(button2);
             Controls.Add(txtComentario);
             Controls.Add(label2);
@@ -152,7 +153,7 @@
             Controls.Add(button1);
             Controls.Add(txtBuscar);
             Controls.Add(lblBuscar);
-            Margin = new Padding(2, 1, 2, 1);
+            Margin = new Padding(4, 2, 4, 2);
             Name = "frmSeguimiento";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmSeguimiento";

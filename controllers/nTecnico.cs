@@ -9,7 +9,7 @@ using soporte_tecnico.models;
 
 namespace soporte_tecnico.controllers
 {
-    internal class nTecnico
+    public class nTecnico
     {
         // Ruta del archivo que se cargó (útil para diagnosticar problemas)
         public string UltimoArchivoCargado { get; private set; } = string.Empty;

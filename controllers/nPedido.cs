@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Linq; // Importante para usar LINQ en los reportes más adelante
+using System.Linq;
 using soporte_tecnico.models;
 
 namespace soporte_tecnico.controllers
 {
-    internal class nPedido
+    public class nPedido
     {
         private List<PedidoSoporte> pedidos;
         private int proximoId;
@@ -33,40 +33,40 @@ namespace soporte_tecnico.controllers
                 Estado.Pendiente
             );
 
-            // Al crearse el pedido, podemos registrar su primer estado en el historial
-            nuevoPedido.HistorialEstados.Add(new HistorialEstado(DateTime.Now, "Ninguno", Estado.Pendiente.ToString()));
+            nuevoPedido.HistorialEstados.Add(new HistorialEstado(DateTime.Now, "Ninguno", Estado.Pendiente.ToString(), cliente.Nombre));
 
             pedidos.Add(nuevoPedido);
             proximoId++;
         }
 
-        // 🔄 MÉTODO MODIFICADO: Ahora registra el historial y comentarios
+        public void CambiarEstado(int idPedido, Estado nuevoEstado, string autor)
+        {
+            RegistrarSeguimiento(idPedido, nuevoEstado, string.Empty, autor);
+        }
+
         public void RegistrarSeguimiento(int idPedido, Estado nuevoEstado, string comentarioTexto, string autor)
         {
             PedidoSoporte pedido = pedidos.Find(p => p.Id == idPedido);
 
             if (pedido != null)
             {
-                // 1. Si el estado cambia, guardamos el historial
+
                 if (pedido.EstadoActual != nuevoEstado)
                 {
                     string estadoAnterior = pedido.EstadoActual.ToString();
                     pedido.EstadoActual = nuevoEstado;
-
-                    pedido.HistorialEstados.Add(new HistorialEstado(DateTime.Now, estadoAnterior, nuevoEstado.ToString()));
-
-                    // 2. Si pasa a ser 'Resuelto', registramos la fecha de fin
+                    pedido.HistorialEstados.Add(new HistorialEstado(DateTime.Now, estadoAnterior, nuevoEstado.ToString(), autor));
                     if (nuevoEstado == Estado.Resuelto)
                     {
                         pedido.FechaResolucion = DateTime.Now;
                     }
                     else
                     {
-                        pedido.FechaResolucion = null; // Por si vuelven a abrir un pedido resuelto
+                        pedido.FechaResolucion = null;
                     }
                 }
 
-                // 3. Si el usuario escribió un comentario, lo agregamos
+
                 if (!string.IsNullOrWhiteSpace(comentarioTexto))
                 {
                     pedido.Comentarios.Add(new Comentario(DateTime.Now, comentarioTexto, autor));

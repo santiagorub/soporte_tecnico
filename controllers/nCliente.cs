@@ -8,7 +8,7 @@ using soporte_tecnico.models;
 
 namespace soporte_tecnico.controllers
 {
-    internal class nCliente
+    public class nCliente
     {
         private List<Cliente> clientes;
         private int proximoId;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace soporte_tecnico.models
 {
-    internal class Tecnico
+    public class Tecnico
     {
         public int Id { get; set; }
         public string Nombre { get; set; }

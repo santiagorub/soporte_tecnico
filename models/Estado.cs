@@ -4,7 +4,7 @@ using System.Text;
 
 namespace soporte_tecnico.models
 {
-    internal enum Estado
+    public enum Estado
     {
         Pendiente,
         EnProgreso,

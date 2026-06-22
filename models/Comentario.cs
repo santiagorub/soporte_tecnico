@@ -4,7 +4,7 @@ using System.Text;
 
 namespace soporte_tecnico.models
 {
-    internal class Comentario
+    public class Comentario
     {
         public DateTime Fecha { get; set; }
         public string Texto { get; set; }

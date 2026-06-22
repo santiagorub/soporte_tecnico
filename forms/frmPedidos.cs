@@ -11,7 +11,7 @@ namespace soporte_tecnico.forms
         private nTecnico _controladorTecnico;
         private nPedido _controladorPedido;
 
-        // Constructor que recibe los controladores de tus compañeros
+
         internal frmPedidos(nCliente nCli, nTecnico nTec, nPedido nPed)
         {
             InitializeComponent();
@@ -19,7 +19,7 @@ namespace soporte_tecnico.forms
             _controladorTecnico = nTec;
             _controladorPedido = nPed;
 
-            // Asociamos el evento Load manualmente por seguridad
+
             this.Load += new EventHandler(frmPedidos_Load);
         }
 
@@ -71,22 +71,16 @@ namespace soporte_tecnico.forms
         {
             if (dgvPedidos.CurrentRow == null)
             {
-                MessageBox.Show("Seleccione un pedido de la lista.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Seleccione un pedido de la lista primero.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             PedidoSoporte pedidoSeleccionado = (PedidoSoporte)dgvPedidos.CurrentRow.DataBoundItem;
             Estado nuevoEstado = (Estado)cmbEstados.SelectedItem;
-
-            _controladorPedido.RegistrarSeguimiento(
-                pedidoSeleccionado.Id, 
-                nuevoEstado,
-                "",
-                "Sistema"
-                );
-
+            string autor = pedidoSeleccionado.ClienteAsignado.Nombre;
+            _controladorPedido.CambiarEstado(pedidoSeleccionado.Id, nuevoEstado, autor);
             ActualizarGrid();
-            MessageBox.Show("Estado actualizado.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"Estado actualizado a {nuevoEstado}. Autor registrado: {autor}.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void cmbEstados_SelectedIndexChanged(object sender, EventArgs e) { }
         private void textBox1_TextChanged(object sender, EventArgs e) { }

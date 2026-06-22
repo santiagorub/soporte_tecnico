@@ -44,7 +44,17 @@ namespace soporte_tecnico.forms
         {
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
-                MessageBox.Show("El nombre es obligatorio.");
+                MessageBox.Show("El nombre es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (string.IsNullOrEmpty(txtTelefono.Text))
+            {
+                MessageBox.Show("El Telefono es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (string.IsNullOrEmpty(txtEmail.Text))
+            {
+                MessageBox.Show("El Email es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -82,60 +92,53 @@ namespace soporte_tecnico.forms
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (e.RowIndex < 0)
-                    return;
 
-                // seleccionar la fila completa
-                dataGridView1.ClearSelection();
-                dataGridView1.Rows[e.RowIndex].Selected = true;
+        {
+
+            // Valida que el clic sea en una fila válida y no en el encabezado
+
+            if (e.RowIndex >= 0)
+
+            {
 
                 DataGridViewRow fila = dataGridView1.Rows[e.RowIndex];
 
-                // si la fila esta vinculada a un objeto Cliente, usarlo (más seguro)
+
+
+                // Cambiado: Leemos el objeto Cliente directamente de la fila de forma segura
+
                 if (fila.DataBoundItem is soporte_tecnico.models.Cliente cliente)
+
                 {
+
                     idSeleccionado = cliente.Id;
+
                     txtNombre.Text = cliente.Nombre ?? string.Empty;
+
                     txtTelefono.Text = cliente.Telefono ?? string.Empty;
+
                     txtEmail.Text = cliente.Email ?? string.Empty;
-                    return;
+
                 }
 
-                // buscar indice de columna 'Id' de forma segura
-                int idColIndex = -1;
-                var col = dataGridView1.Columns["Id"];
-                if (col != null) idColIndex = col.Index;
+                else
 
-                object idVal = null;
-                if (idColIndex >= 0 && idColIndex < fila.Cells.Count)
-                    idVal = fila.Cells[idColIndex].Value;
-                else if (fila.Cells.Count > 0)
-                    idVal = fila.Cells[0].Value;
-
-                if (idVal == null || idVal == DBNull.Value)
                 {
-                    idSeleccionado = -1;
-                    return;
+
+                    // Alternativa por si las columnas se crearon manualmente sin DataBoundItem
+
+                    idSeleccionado = Convert.ToInt32(fila.Cells[0].Value);
+
+                    txtNombre.Text = fila.Cells[1].Value?.ToString() ?? string.Empty;
+
+                    txtTelefono.Text = fila.Cells[2].Value?.ToString() ?? string.Empty;
+
+                    txtEmail.Text = fila.Cells[3].Value?.ToString() ?? string.Empty;
+
                 }
 
-                idSeleccionado = Convert.ToInt32(idVal);
-
-                // rellenar campos por indices seguros (si existen)
-                int nombreIdx = (dataGridView1.Columns["Nombre"]?.Index) ?? 1;
-                int telefonoIdx = (dataGridView1.Columns["Telefono"]?.Index) ?? 2;
-                int emailIdx = (dataGridView1.Columns["Email"]?.Index) ?? 3;
-
-                txtNombre.Text = (nombreIdx >= 0 && nombreIdx < fila.Cells.Count) ? fila.Cells[nombreIdx].Value?.ToString() ?? string.Empty : string.Empty;
-                txtTelefono.Text = (telefonoIdx >= 0 && telefonoIdx < fila.Cells.Count) ? fila.Cells[telefonoIdx].Value?.ToString() ?? string.Empty : string.Empty;
-                txtEmail.Text = (emailIdx >= 0 && emailIdx < fila.Cells.Count) ? fila.Cells[emailIdx].Value?.ToString() ?? string.Empty : string.Empty;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al seleccionar la fila: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
         }
         private void LimpiarFormulario()
         {

@@ -2,6 +2,7 @@
 using soporte_tecnico.models;
 using System;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace soporte_tecnico.forms
 {
@@ -24,8 +25,20 @@ namespace soporte_tecnico.forms
 
         private void CargarPedidos()
         {
+            var pedidosMostrar = gestorPedidos.ObtenerTodos()
+                .Select(p => new
+                {
+                    p.Id,
+                    Cliente = p.ClienteAsignado.Nombre,
+                    Tecnico = p.TecnicoAsignado.Nombre,
+                    p.Descripcion,
+                    FechaIngreso = p.FechaIngreso.ToString("dd/MM/yyyy HH:mm"),
+                    Estado = p.EstadoActual.ToString()
+                })
+                .ToList();
+
             dgvSeguimiento.DataSource = null;
-            dgvSeguimiento.DataSource = gestorPedidos.ObtenerTodos();
+            dgvSeguimiento.DataSource = pedidosMostrar;
 
             dgvSeguimiento.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvSeguimiento.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -38,10 +51,15 @@ namespace soporte_tecnico.forms
         {
             if (e.RowIndex >= 0)
             {
-                pedidoSeleccionado =
-                    (PedidoSoporte)dgvSeguimiento.Rows[e.RowIndex].DataBoundItem;
+                int idPedido = Convert.ToInt32(dgvSeguimiento.Rows[e.RowIndex].Cells["Id"].Value);
 
-                cmbEstado.SelectedItem = pedidoSeleccionado.EstadoActual;
+                pedidoSeleccionado = gestorPedidos.ObtenerTodos()
+                    .FirstOrDefault(p => p.Id == idPedido);
+
+                if (pedidoSeleccionado != null)
+                {
+                    cmbEstado.SelectedItem = pedidoSeleccionado.EstadoActual;
+                }
             }
         }
 
@@ -71,34 +89,33 @@ namespace soporte_tecnico.forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int id;
-
-            if (int.TryParse(txtBuscar.Text, out id))
-            {
-                foreach (DataGridViewRow fila in dgvSeguimiento.Rows)
-                {
-                    if (fila.DataBoundItem != null)
-                    {
-                        PedidoSoporte pedido =
-                            (PedidoSoporte)fila.DataBoundItem;
-
-                        if (pedido.Id == id)
-                        {
-                            fila.Selected = true;
-                            dgvSeguimiento.FirstDisplayedScrollingRowIndex = fila.Index;
-
-                            pedidoSeleccionado = pedido;
-                            cmbEstado.SelectedItem = pedido.EstadoActual;
-
-                            break;
-                        }
-                    }
-                }
-            }
-            else
+            if (!int.TryParse(txtBuscar.Text, out int id))
             {
                 MessageBox.Show("Ingrese un ID válido.");
+                return;
             }
+
+            foreach (DataGridViewRow fila in dgvSeguimiento.Rows)
+            {
+                if (fila.Cells["Id"].Value != null &&
+                    Convert.ToInt32(fila.Cells["Id"].Value) == id)
+                {
+                    fila.Selected = true;
+                    dgvSeguimiento.FirstDisplayedScrollingRowIndex = fila.Index;
+
+                    pedidoSeleccionado = gestorPedidos.ObtenerTodos()
+                        .FirstOrDefault(p => p.Id == id);
+
+                    if (pedidoSeleccionado != null)
+                    {
+                        cmbEstado.SelectedItem = pedidoSeleccionado.EstadoActual;
+                    }
+
+                    return;
+                }
+            }
+
+            MessageBox.Show("No se encontró un pedido con ese ID.");
         }
 
         private void label1_Click(object sender, EventArgs e)

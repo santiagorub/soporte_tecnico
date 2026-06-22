@@ -67,7 +67,7 @@ namespace soporte_tecnico.controllers
             try
             {
                 //ruta fija de los clientes
-                string repoFile = Path.Combine("C:", "progra1", "soporte_tecnico", "data", "clientes.json");
+                string repoFile = Path.Combine("C:", "Soporte Tecnico", "soporte_tecnico", "data", "clientes.json");
 
                 //asegurar existencia del directorio/archivo, si falta crear archivo vacío
                 var dir = Path.GetDirectoryName(repoFile) ?? AppDomain.CurrentDomain.BaseDirectory;

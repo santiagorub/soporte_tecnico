@@ -80,7 +80,7 @@ namespace soporte_tecnico
         {
             if (reportesForm == null || reportesForm.IsDisposed)
             {
-                reportesForm = new frmReportes();
+                reportesForm = new frmReportes(controladorPedido);
                 reportesForm.FormClosed += ReportesForm_FormClosed;
             }
             if (!reportesForm.Visible)

@@ -60,7 +60,14 @@ namespace soporte_tecnico.forms
             Tecnico tecnicoSeleccionado = (Tecnico)cmbTecnicos.SelectedItem;
             string descripcion = txtDescripcion.Text;
 
-            _controladorPedido.Agregar(clienteSeleccionado, tecnicoSeleccionado, descripcion);
+            Estado estadoSeleccionado = (Estado)cmbEstados.SelectedItem;
+
+            _controladorPedido.Agregar(
+                clienteSeleccionado,
+                tecnicoSeleccionado,
+                descripcion,
+                estadoSeleccionado
+            );
 
             txtDescripcion.Clear();
             ActualizarGrid();

@@ -22,7 +22,7 @@ namespace soporte_tecnico.controllers
             return pedidos;
         }
 
-        public void Agregar(Cliente cliente, Tecnico tecnico, string descripcion)
+        public void Agregar(Cliente cliente, Tecnico tecnico, string descripcion, Estado estadoInicial)
         {
             PedidoSoporte nuevoPedido = new PedidoSoporte(
                 proximoId,
@@ -30,10 +30,12 @@ namespace soporte_tecnico.controllers
                 tecnico,
                 descripcion,
                 DateTime.Now,
-                Estado.Pendiente
+                estadoInicial
             );
 
-            nuevoPedido.HistorialEstados.Add(new HistorialEstado(DateTime.Now, "Ninguno", Estado.Pendiente.ToString(), cliente.Nombre));
+            nuevoPedido.HistorialEstados.Add(
+                new HistorialEstado(DateTime.Now, "Ninguno", estadoInicial.ToString(), "Sistema")
+            );
 
             pedidos.Add(nuevoPedido);
             proximoId++;
@@ -46,7 +48,7 @@ namespace soporte_tecnico.controllers
 
         public void RegistrarSeguimiento(int idPedido, Estado nuevoEstado, string comentarioTexto, string autor)
         {
-            PedidoSoporte pedido = pedidos.Find(p => p.Id == idPedido);
+            PedidoSoporte? pedido = pedidos.Find(p => p.Id == idPedido);
 
             if (pedido != null)
             {
